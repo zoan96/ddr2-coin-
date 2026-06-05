@@ -3,254 +3,476 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DDR2 Coin — The Fastest RAM Memecoin on TON</title>
+  <title>Купить DDR2 Coin – Самый быстрый мемкоин на TON</title>
+  <meta name="description" content="DDR2 Coin – RAM-мемкоин на TON. Low Latency. High Frequency. No Page Faults. Купить на DeDust.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Fira+Code:wght@400;700&display=swap" rel="stylesheet">
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+    :root {
+      --bg: #0a0a0a;
+      --surface: #1a1a1a;
+      --green: #00ff41;
+      --yellow: #f5e56b;
+      --white: #e0e0e0;
+      --muted: #555;
+      --dark-green: #00aa2a;
+    }
     * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
     body {
-      background: #0a0a0a;
-      color: #00ff88;
-      font-family: 'Press Start 2P', monospace;
+      background: var(--bg);
+      color: var(--white);
+      font-family: 'Fira Code', monospace;
       min-height: 100vh;
+      overflow-x: hidden;
+    }
+    /* noise overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+    }
+    .wrap { max-width: 800px; margin: 0 auto; padding: 0 20px; }
+
+    /* === HEADER === */
+    header {
+      position: sticky;
+      top: 0;
+      background: rgba(10,10,10,0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid #222;
+      padding: 14px 0;
+      z-index: 100;
+    }
+    header .wrap {
       display: flex;
-      flex-direction: column;
+      justify-content: space-between;
       align-items: center;
-      image-rendering: pixelated;
     }
-    .container {
-      max-width: 720px;
-      width: 100%;
-      padding: 20px;
+    .logo {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 14px;
+      color: var(--green);
+      text-decoration: none;
+      text-shadow: 0 0 10px var(--green);
+    }
+    .logo span { color: var(--muted); font-size: 8px; display: block; margin-top: 3px; }
+    nav a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 11px;
+      margin-left: 20px;
+      transition: color 0.2s;
+    }
+    nav a:hover { color: var(--green); }
+
+    /* === HERO === */
+    .hero {
       text-align: center;
-    }
-    .section {
-      border: 3px solid #00ff88;
-      padding: 24px 20px;
-      margin: 24px 0;
-      background: #0d0d0d;
+      padding: 60px 0 40px;
       position: relative;
     }
-    .section-label {
+    .ram-art {
+      width: 120px;
+      height: 40px;
+      margin: 0 auto 25px;
+      background: var(--surface);
+      border: 2px solid var(--green);
+      position: relative;
+      box-shadow: 0 0 20px rgba(0,255,65,0.2);
+      animation: ramPulse 2s ease-in-out infinite;
+    }
+    .ram-art::before {
+      content: '';
       position: absolute;
-      top: -10px;
-      left: 20px;
-      background: #0a0a0a;
-      padding: 0 8px;
-      font-size: 8px;
-      color: #008844;
+      top: 8px; left: 10px; right: 10px;
+      height: 6px;
+      background: repeating-linear-gradient(90deg, var(--green) 0px, var(--green) 4px, transparent 4px, transparent 8px);
+      animation: ramScan 1.5s linear infinite;
+    }
+    .ram-art::after {
+      content: '';
+      position: absolute;
+      bottom: 6px; left: 15px;
+      width: 8px; height: 8px;
+      background: var(--yellow);
+      box-shadow:
+        18px 0 0 var(--yellow),
+        36px 0 0 var(--yellow),
+        54px 0 0 var(--yellow);
+      animation: ramBlink 3s step-end infinite;
+    }
+    @keyframes ramPulse {
+      0%, 100% { box-shadow: 0 0 20px rgba(0,255,65,0.2); }
+      50% { box-shadow: 0 0 40px rgba(0,255,65,0.5); }
+    }
+    @keyframes ramScan {
+      0% { background-position: 0 0; }
+      100% { background-position: 16px 0; }
+    }
+    @keyframes ramBlink {
+      0%, 80%, 100% { opacity: 1; }
+      85% { opacity: 0.3; }
     }
     h1 {
-      font-size: 32px;
-      color: #00ff88;
-      text-shadow: 0 0 20px #00ff88, 0 0 40px rgba(0,255,136,0.3);
-      margin: 30px 0 10px;
-    }
-    .glitch {
-      animation: glitch 3s infinite;
-    }
-    @keyframes glitch {
-      0%, 90%, 100% { transform: translate(0); }
-      92% { transform: translate(-2px, 1px); }
-      94% { transform: translate(2px, -1px); }
-      96% { transform: translate(-1px, 2px); }
-      98% { transform: translate(1px, -2px); }
+      font-family: 'Press Start 2P', monospace;
+      font-size: clamp(24px, 6vw, 42px);
+      color: var(--green);
+      text-shadow: 0 0 30px var(--green), 0 0 60px rgba(0,255,65,0.2);
+      margin-bottom: 15px;
+      line-height: 1.3;
     }
     .hero-sub {
-      font-size: 9px;
-      color: #00cc66;
-      margin-bottom: 8px;
-    }
-    .hero-icon {
-      font-size: 72px;
-      margin: 15px 0;
-      filter: drop-shadow(0 0 15px #00ff88);
-    }
-    .tagline {
-      font-size: 11px;
-      color: #00ff88;
-      margin: 15px 0;
+      font-size: 13px;
+      color: var(--white);
       line-height: 1.8;
+      max-width: 500px;
+      margin: 0 auto 30px;
     }
-    .highlight {
-      color: #fff;
-      background: #00ff88;
-      padding: 2px 6px;
-      color: #0a0a0a;
-    }
-    .info-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      text-align: left;
-      font-size: 8px;
-      margin: 10px 0;
-    }
-    .info-grid .lbl { color: #005522; font-size: 7px; }
-    .info-grid .val { color: #00ff88; word-break: break-all; }
-    .info-grid .full { grid-column: 1 / -1; }
-    .bullet-list {
-      text-align: left;
-      font-size: 8px;
-      line-height: 2;
-      margin: 10px 0;
-      list-style: none;
-    }
-    .bullet-list li::before {
-      content: "▸ ";
-      color: #00ff88;
-    }
+    .cta-wrap { margin: 20px 0; }
     .btn {
       display: inline-block;
-      padding: 14px 28px;
-      margin: 8px;
+      padding: 16px 32px;
       font-family: 'Press Start 2P', monospace;
-      font-size: 10px;
-      background: #00ff88;
-      color: #0a0a0a;
+      font-size: 11px;
       text-decoration: none;
-      border: 2px solid #00cc66;
-      transition: all 0.1s;
+      border: 2px solid var(--green);
+      transition: all 0.15s;
       cursor: pointer;
     }
-    .btn:hover {
-      background: #0a0a0a;
-      color: #00ff88;
-      box-shadow: 0 0 20px #00ff88;
+    .btn-primary {
+      background: var(--green);
+      color: var(--bg);
+      animation: ctaPulse 2s ease-in-out infinite;
     }
-    .btn-lg {
-      font-size: 14px;
-      padding: 18px 36px;
-      animation: pulse 2s infinite;
-    }
-    @keyframes pulse {
-      0%, 100% { box-shadow: 0 0 10px #00ff88; }
-      50% { box-shadow: 0 0 30px #00ff88, 0 0 60px rgba(0,255,136,0.3); }
+    .btn-primary:hover {
+      background: var(--bg);
+      color: var(--green);
+      box-shadow: 0 0 30px var(--green);
     }
     .btn-outline {
       background: transparent;
-      color: #00ff88;
+      color: var(--green);
     }
-    .btn-outline:hover { background: #00ff88; color: #0a0a0a; }
-    .stats {
-      display: flex;
-      justify-content: space-around;
-      flex-wrap: wrap;
-      gap: 15px;
-      margin: 20px 0;
+    .btn-outline:hover {
+      background: var(--green);
+      color: var(--bg);
     }
-    .stat { text-align: center; }
-    .stat-num { font-size: 20px; color: #00ff88; }
-    .stat-label { font-size: 7px; color: #008844; margin-top: 5px; }
-    .quote {
-      font-size: 8px;
+    @keyframes ctaPulse {
+      0%, 100% { box-shadow: 0 0 10px rgba(0,255,65,0.3); }
+      50% { box-shadow: 0 0 25px rgba(0,255,65,0.6), 0 0 50px rgba(0,255,65,0.2); }
+    }
+    .scarcity {
+      font-size: 10px;
+      color: var(--muted);
+      margin-top: 15px;
       line-height: 1.6;
-      color: #00cc66;
-      font-style: italic;
     }
-    .blink {
+
+    /* === SPEED SECTION === */
+    .speed {
+      padding: 50px 0;
+    }
+    .section-title {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 13px;
+      color: var(--green);
+      text-align: center;
+      margin-bottom: 30px;
+      text-shadow: 0 0 10px var(--green);
+    }
+    .cols {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .col {
+      background: var(--surface);
+      border: 1px solid #333;
+      padding: 25px 18px;
+      text-align: center;
+      transition: border-color 0.3s;
+    }
+    .col:hover { border-color: var(--green); }
+    .col-icon {
+      font-size: 28px;
+      margin-bottom: 12px;
+    }
+    .col-title {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 8px;
+      color: var(--yellow);
+      margin-bottom: 10px;
+    }
+    .col-text {
+      font-size: 11px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* === TERMINAL === */
+    .terminal-section {
+      padding: 50px 0;
+    }
+    .terminal {
+      background: #0d0d0d;
+      border: 2px solid #333;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .terminal-bar {
+      background: #1a1a1a;
+      padding: 8px 12px;
+      display: flex;
+      gap: 6px;
+      align-items: center;
+    }
+    .terminal-dot { width: 10px; height: 10px; border-radius: 50%; }
+    .terminal-dot.r { background: #ff5f56; }
+    .terminal-dot.y { background: #ffbd2e; }
+    .terminal-dot.g { background: #27c93f; }
+    .terminal-title {
+      font-size: 9px;
+      color: var(--muted);
+      margin-left: 10px;
+    }
+    .terminal-body {
+      padding: 20px;
+      font-size: 12px;
+      line-height: 1.8;
+    }
+    .terminal-body .prompt { color: var(--green); }
+    .terminal-body .key { color: var(--muted); }
+    .terminal-body .val { color: var(--yellow); }
+    .terminal-body .cursor {
+      display: inline-block;
+      width: 8px;
+      height: 14px;
+      background: var(--green);
+      vertical-align: middle;
       animation: blink 1s step-end infinite;
     }
     @keyframes blink { 50% { opacity: 0; } }
-    .footer {
-      font-size: 7px;
-      color: #005522;
-      margin: 30px 0;
+
+    /* === QUOTE === */
+    .quote-section {
+      padding: 50px 0;
+    }
+    .quote-box {
+      background: var(--surface);
+      border-left: 4px solid var(--green);
+      padding: 30px;
+      text-align: center;
+    }
+    .quote-text {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 12px;
+      color: var(--white);
       line-height: 1.8;
     }
-    .counter {
-      font-size: 7px;
-      color: #005522;
-      margin-top: 5px;
+
+    /* === FINAL CTA === */
+    .final-cta {
+      padding: 50px 0;
+      text-align: center;
     }
+    .final-cta .btn-primary {
+      font-size: 12px;
+      padding: 18px 36px;
+    }
+    .disclaimer {
+      font-size: 9px;
+      color: var(--muted);
+      margin-top: 20px;
+      line-height: 1.6;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* === FOOTER === */
+    footer {
+      border-top: 1px solid #222;
+      padding: 30px 0;
+      text-align: center;
+      font-size: 10px;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+    footer .socials {
+      margin: 10px 0;
+    }
+    footer .socials a {
+      color: var(--muted);
+      text-decoration: none;
+      margin: 0 8px;
+      font-size: 10px;
+      transition: color 0.2s;
+    }
+    footer .socials a:hover { color: var(--green); }
+
+    /* === GLITCH === */
+    .glitch { position: relative; }
+    .glitch::before,
+    .glitch::after {
+      content: attr(data-text);
+      position: absolute;
+      left: 0;
+      right: 0;
+      overflow: hidden;
+    }
+    .glitch::before {
+      animation: glitch1 3s infinite linear;
+      clip-path: inset(0 0 65% 0);
+      color: #ff0040;
+      opacity: 0.15;
+    }
+    .glitch::after {
+      animation: glitch2 3s infinite linear;
+      clip-path: inset(65% 0 0 0);
+      color: #00f0ff;
+      opacity: 0.15;
+    }
+    @keyframes glitch1 {
+      0%, 88%, 100% { transform: translate(0); }
+      90% { transform: translate(-3px, 1px); }
+      92% { transform: translate(3px, -1px); }
+      94% { transform: translate(-1px, 2px); }
+      96% { transform: translate(2px, 0); }
+    }
+    @keyframes glitch2 {
+      0%, 88%, 100% { transform: translate(0); }
+      90% { transform: translate(2px, -1px); }
+      92% { transform: translate(-2px, 1px); }
+      94% { transform: translate(1px, -2px); }
+      96% { transform: translate(-3px, 0); }
+    }
+
     @media (max-width: 600px) {
+      .cols { grid-template-columns: 1fr; }
+      nav { display: none; }
       h1 { font-size: 22px; }
-      .info-grid { grid-template-columns: 1fr; }
-      .btn-lg { font-size: 11px; padding: 14px 24px; }
     }
   </style>
 </head>
 <body>
-  <div class="container">
 
-    <div class="hero-icon">🧠⚡</div>
-    <h1 class="glitch">DDR2 COIN</h1>
-    <div class="hero-sub">$DDR2 / JETTON on TON</div>
-    <div class="tagline">
-      LOW LATENCY.<br>
-      HIGH FREQUENCY.<br>
-      <span class="highlight">NO PAGE FAULTS.</span>
+  <!-- HEADER -->
+  <header>
+    <div class="wrap">
+      <a href="#" class="logo">$DDR2 <span>JETTON on TON</span></a>
+      <nav>
+        <a href="#about">О токене</a>
+        <a href="#buy">Как купить</a>
+        <a href="#contract">Контракт</a>
+      </nav>
     </div>
+  </header>
 
-    <div class="section">
-      <div class="section-label">ATTENTION</div>
-      <p style="font-size:9px; line-height:1.6; color:#00cc66;">
-        Ты держишь в руках <strong style="color:#00ff88;">самый быстрый мемкоин на TON</strong>.<br>
-        Никаких тормозов. Никаких лагов. Только чистая скорость.
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap">
+      <div class="ram-art"></div>
+      <h1 class="glitch" data-text="DDR2 COIN">DDR2 COIN</h1>
+      <p class="hero-sub">
+        Low Latency. High Frequency. No Page Faults.<br>
+        Хватит тормознутых мемкоинов. Этот — на чистой скорости. Без лагов. Без подхалимства.
       </p>
+      <div class="cta-wrap">
+        <a href="https://dedust.io/pools/EQDpNY53lJFFodKp02jfo2FYMq5X2F00tTMBlg9E_MD_dnSV" class="btn btn-primary" target="_blank">⚡ КУПИТЬ DDR2 НА DeDust</a>
+      </div>
+      <p class="scarcity">Пока ты читаешь этот текст, кто-то уже покупает.<br>Вопрос не в том, войдёшь ли ты. Вопрос — по какой цене.</p>
     </div>
+  </section>
 
-    <div class="section">
-      <div class="section-label">INTEREST</div>
-      <ul class="bullet-list">
-        <li><strong>1,000,000 DDR2</strong> — эмиссия навсегда</li>
-        <li>Смарт-контракт <strong>верифицирован</strong> — код открыт</li>
-        <li>Ликвидность на <strong>DeDust</strong> — честный DEX</li>
-        <li>Первый и единственный RAM-мемкоин на TON</li>
-        <li>Ты заходишь на <strong>ground floor</strong></li>
-      </ul>
-      <div class="info-grid">
-        <div><div class="lbl">Контракт</div><div class="val">EQAWhZugOyWUhCTUwTzDQTtEUSAaAOoki6esWjL2WMEFABSs</div></div>
-        <div><div class="lbl">Сеть</div><div class="val">TON (Jetton)</div></div>
-        <div><div class="lbl">Символ</div><div class="val">DDR2</div></div>
-        <div><div class="lbl">Десятичных</div><div class="val">9</div></div>
+  <!-- SPEED -->
+  <section class="speed" id="about">
+    <div class="wrap">
+      <div class="section-title">// СКОРОСТЬ — ЭТО НАШЕ ВСЁ</div>
+      <div class="cols">
+        <div class="col">
+          <div class="col-icon">⚡</div>
+          <div class="col-title">MGNOВЕННЫЕ<br>ТРАНЗАКЦИИ</div>
+          <div class="col-text">Никаких зависаний. Твой кошелёк даже не заметит, как ты стал богаче.</div>
+        </div>
+        <div class="col">
+          <div class="col-icon">🧠</div>
+          <div class="col-title">ТЕХНОЛОГИИ<br>RAM</div>
+          <div class="col-text">Мы первые, кто сделал мемкоин на оперативной памяти. Забудь про HDD-монеты.</div>
+        </div>
+        <div class="col">
+          <div class="col-icon">🔒</div>
+          <div class="col-title">НИКАКОГО<br>МУСОРА</div>
+          <div class="col-text">Эмиссия заморожена навсегда. 1 000 000 монет, и ни одной больше. Всё честно.</div>
+        </div>
       </div>
     </div>
+  </section>
 
-    <div class="section">
-      <div class="section-label">DESIRE</div>
-      <div class="stats">
-        <div class="stat">
-          <div class="stat-num">999K</div>
-          <div class="stat-label">В ОБРАЩЕНИИ</div>
+  <!-- TERMINAL -->
+  <section class="terminal-section" id="contract">
+    <div class="wrap">
+      <div class="section-title">// ТЕХНИЧЕСКИЕ ХАРАКТЕРИСТИКИ</div>
+      <div class="terminal">
+        <div class="terminal-bar">
+          <div class="terminal-dot r"></div>
+          <div class="terminal-dot y"></div>
+          <div class="terminal-dot g"></div>
+          <span class="terminal-title">ddr2-specs — bash</span>
         </div>
-        <div class="stat">
-          <div class="stat-num">1</div>
-          <div class="stat-label">ДЕРЖАТЕЛЬ</div>
-        </div>
-        <div class="stat">
-          <div class="stat-num">0.18 TON</div>
-          <div class="stat-label">ЛИКВИДНОСТЬ</div>
+        <div class="terminal-body">
+          <span class="prompt">></span> <span class="key">Сеть:</span> <span class="val">TON (Jetton)</span><br>
+          <span class="prompt">></span> <span class="key">Контракт:</span> <span class="val">EQAWhZugOyWUhCTUwTzDQTtEUSAaAOoki6esWjL2WMEFABSs</span><br>
+          <span class="prompt">></span> <span class="key">Десятичных:</span> <span class="val">9</span><br>
+          <span class="prompt">></span> <span class="key">Эмиссия:</span> <span class="val">1,000,000 DDR2 (фиксировано)</span><br>
+          <span class="prompt">></span> <span class="key">Ликвидность:</span> <span class="val">DeDust CPMM (честный DEX)</span><br>
+          <span class="prompt">></span> <span class="key">Держателей:</span> <span class="val">растёт на глазах...</span><br>
+          <span class="prompt">></span> <span class="key">Статус:</span> <span class="val" style="color:#00ff41;">ACTIVE</span> <span class="cursor"></span>
         </div>
       </div>
-      <p style="font-size:8px; line-height:1.6; color:#00cc66; margin-top:10px;">
-        Пока ты читаешь, кто-то уже покупает.<br>
-        Вопрос не в том, <em>войдёшь ли ты</em>.<br>
-        Вопрос — <strong style="color:#00ff88;">по какой цене</strong>.
-      </p>
     </div>
+  </section>
 
-    <div class="section" style="border-color: #00ff88; border-width: 4px;">
-      <div class="section-label">ACTION</div>
-      <p style="font-size:8px; color:#008844; margin-bottom:15px;">
-        Купить сейчас — потом будет дороже.
-      </p>
-      <a href="https://dedust.io/pools/EQDpNY53lJFFodKp02jfo2FYMq5X2F00tTMBlg9E_MD_dnSV" class="btn btn-lg" target="_blank">⚡ КУПИТЬ DDR2 НА DeDust</a>
-      <div style="margin-top:15px;">
+  <!-- QUOTE -->
+  <section class="quote-section">
+    <div class="wrap">
+      <div class="quote-box">
+        <div class="quote-text">
+          «DDR2 — это не просто мем.<br>Это состояние памяти.»
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="final-cta" id="buy">
+    <div class="wrap">
+      <a href="https://dedust.io/pools/EQDpNY53lJFFodKp02jfo2FYMq5X2F00tTMBlg9E_MD_dnSV" class="btn btn-primary" target="_blank">🚀 Купить DDR2, пока не поздно</a>
+      <div style="margin-top: 15px;">
         <a href="https://tonviewer.com/EQAWhZugOyWUhCTUwTzDQTtEUSAaAOoki6esWjL2WMEFABSs" class="btn btn-outline" target="_blank">🔍 TonViewer</a>
         <a href="https://tonscan.org/jetton/EQAWhZugOyWUhCTUwTzDQTtEUSAaAOoki6esWjL2WMEFABSs" class="btn btn-outline" target="_blank">📜 Tonscan</a>
       </div>
+      <p class="disclaimer">
+        Помни: это мемкоин. Его цена может как улететь в космос, так и рухнуть.<br>
+        Вкладывай только то, что готов потерять без сожалений.
+      </p>
     </div>
+  </section>
 
-    <div class="quote">
-      «DDR2 — это не просто мем. Это состояние памяти.»<br><br>
-      <span class="blink">▶ LOW LATENCY. HIGH FREQUENCY. NO PAGE FAULTS.</span>
+  <!-- FOOTER -->
+  <footer>
+    <div class="wrap">
+      <div class="socials">
+        <a href="#">Telegram</a>
+        <a href="#">X (Twitter)</a>
+        <a href="#">DeDust</a>
+      </div>
+      © 2026 DDR2 COIN. JETTON on TON. RAM is the king.
     </div>
+  </footer>
 
-    <div class="footer">
-      DDR2 Coin 2026 — Built on TON<br>
-      Not financial advice. Just vibes.<br>
-      <span style="font-size:6px;">DDR2 > DDR3 > DDR4 > DDR5</span>
-    </div>
-  </div>
 </body>
 </html>
