@@ -23,44 +23,85 @@
       padding: 20px;
       text-align: center;
     }
-    .pixel-border {
-      border: 4px solid #00ff88;
-      box-shadow: 0 0 20px rgba(0,255,136,0.3), inset 0 0 20px rgba(0,255,136,0.1);
-      padding: 20px;
-      margin: 20px 0;
+    .section {
+      border: 3px solid #00ff88;
+      padding: 24px 20px;
+      margin: 24px 0;
       background: #0d0d0d;
+      position: relative;
+    }
+    .section-label {
+      position: absolute;
+      top: -10px;
+      left: 20px;
+      background: #0a0a0a;
+      padding: 0 8px;
+      font-size: 8px;
+      color: #008844;
     }
     h1 {
-      font-size: 28px;
+      font-size: 32px;
       color: #00ff88;
-      text-shadow: 0 0 10px #00ff88;
-      margin: 20px 0;
-      line-height: 1.4;
+      text-shadow: 0 0 20px #00ff88, 0 0 40px rgba(0,255,136,0.3);
+      margin: 30px 0 10px;
     }
-    .subtitle {
-      font-size: 10px;
+    .glitch {
+      animation: glitch 3s infinite;
+    }
+    @keyframes glitch {
+      0%, 90%, 100% { transform: translate(0); }
+      92% { transform: translate(-2px, 1px); }
+      94% { transform: translate(2px, -1px); }
+      96% { transform: translate(-1px, 2px); }
+      98% { transform: translate(1px, -2px); }
+    }
+    .hero-sub {
+      font-size: 9px;
       color: #00cc66;
-      margin-bottom: 20px;
+      margin-bottom: 8px;
     }
-    .ram-pixel {
-      font-size: 64px;
-      margin: 10px 0;
-      filter: drop-shadow(0 0 10px #00ff88);
+    .hero-icon {
+      font-size: 72px;
+      margin: 15px 0;
+      filter: drop-shadow(0 0 15px #00ff88);
+    }
+    .tagline {
+      font-size: 11px;
+      color: #00ff88;
+      margin: 15px 0;
+      line-height: 1.8;
+    }
+    .highlight {
+      color: #fff;
+      background: #00ff88;
+      padding: 2px 6px;
+      color: #0a0a0a;
     }
     .info-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 10px;
+      gap: 12px;
       text-align: left;
-      font-size: 9px;
-      margin: 20px 0;
+      font-size: 8px;
+      margin: 10px 0;
     }
-    .info-grid .label { color: #008844; }
-    .info-grid .value { color: #00ff88; word-break: break-all; }
+    .info-grid .lbl { color: #005522; font-size: 7px; }
+    .info-grid .val { color: #00ff88; word-break: break-all; }
     .info-grid .full { grid-column: 1 / -1; }
+    .bullet-list {
+      text-align: left;
+      font-size: 8px;
+      line-height: 2;
+      margin: 10px 0;
+      list-style: none;
+    }
+    .bullet-list li::before {
+      content: "▸ ";
+      color: #00ff88;
+    }
     .btn {
       display: inline-block;
-      padding: 12px 24px;
+      padding: 14px 28px;
       margin: 8px;
       font-family: 'Press Start 2P', monospace;
       font-size: 10px;
@@ -72,8 +113,18 @@
       cursor: pointer;
     }
     .btn:hover {
-      background: #00cc66;
-      box-shadow: 0 0 15px #00ff88;
+      background: #0a0a0a;
+      color: #00ff88;
+      box-shadow: 0 0 20px #00ff88;
+    }
+    .btn-lg {
+      font-size: 14px;
+      padding: 18px 36px;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 10px #00ff88; }
+      50% { box-shadow: 0 0 30px #00ff88, 0 0 60px rgba(0,255,136,0.3); }
     }
     .btn-outline {
       background: transparent;
@@ -87,99 +138,118 @@
       gap: 15px;
       margin: 20px 0;
     }
-    .stat {
-      text-align: center;
-    }
-    .stat-num {
-      font-size: 16px;
-      color: #00ff88;
-    }
-    .stat-label {
-      font-size: 7px;
-      color: #008844;
-      margin-top: 5px;
-    }
-    .footer {
-      font-size: 7px;
-      color: #005522;
-      margin: 30px 0;
+    .stat { text-align: center; }
+    .stat-num { font-size: 20px; color: #00ff88; }
+    .stat-label { font-size: 7px; color: #008844; margin-top: 5px; }
+    .quote {
+      font-size: 8px;
+      line-height: 1.6;
+      color: #00cc66;
+      font-style: italic;
     }
     .blink {
       animation: blink 1s step-end infinite;
     }
     @keyframes blink { 50% { opacity: 0; } }
-    .ascii-ram {
+    .footer {
+      font-size: 7px;
       color: #005522;
-      font-size: 8px;
-      line-height: 1.2;
-      margin: 15px 0;
+      margin: 30px 0;
+      line-height: 1.8;
+    }
+    .counter {
+      font-size: 7px;
+      color: #005522;
+      margin-top: 5px;
     }
     @media (max-width: 600px) {
-      h1 { font-size: 18px; }
+      h1 { font-size: 22px; }
       .info-grid { grid-template-columns: 1fr; }
+      .btn-lg { font-size: 11px; padding: 14px 24px; }
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <div class="ascii-ram">
-╔══════════════════════════╗<br>
-║  ██████╗ ██████╗ ██████╗ ║<br>
-║  ██╔══██╗██╔══██╗╚══██╔╝ ║<br>
-║  ██║  ██║██████╔╝  ██║   ║<br>
-║  ██║  ██║██╔══██╗  ██║   ║<br>
-║  ██████╔╝██║  ██║  ██║   ║<br>
-║  ╚═════╝ ╚═╝  ╚═╝  ╚═╝   ║<br>
-╚══════════════════════════╝
+
+    <div class="hero-icon">🧠⚡</div>
+    <h1 class="glitch">DDR2 COIN</h1>
+    <div class="hero-sub">$DDR2 / JETTON on TON</div>
+    <div class="tagline">
+      LOW LATENCY.<br>
+      HIGH FREQUENCY.<br>
+      <span class="highlight">NO PAGE FAULTS.</span>
     </div>
 
-    <h1>DDR2 COIN</h1>
-    <div class="subtitle">The Fastest RAM Memecoin on TON</div>
-    <div class="ram-pixel">🧠⚡</div>
-
-    <div class="pixel-border">
-      <div class="info-grid">
-        <div><span class="label">Имя:</span><br>DDR2 Coin</div>
-        <div><span class="label">Символ:</span><br>DDR2</div>
-        <div><span class="label">Сеть:</span><br>TON (Jetton)</div>
-        <div><span class="label">Десятичных:</span><br>9</div>
-        <div><span class="label">Эмиссия:</span><br>1,000,000 DDR2</div>
-        <div><span class="label">Пул:</span><br>DeDust CPMM</div>
-        <div class="full"><span class="label">Контракт:</span><br><span class="value">EQAWhZugOyWUhCTUwTzDQTtEUSAaAOoki6esWjL2WMEFABSs</span></div>
-      </div>
-    </div>
-
-    <div class="stats">
-      <div class="stat">
-        <div class="stat-num">999K</div>
-        <div class="stat-label">В ОБРАЩЕНИИ</div>
-      </div>
-      <div class="stat">
-        <div class="stat-num">1</div>
-        <div class="stat-label">ДЕРЖАТЕЛЬ</div>
-      </div>
-      <div class="stat">
-        <div class="stat-num">0.18 TON</div>
-        <div class="stat-label">ЛИКВИДНОСТЬ</div>
-      </div>
-    </div>
-
-    <a href="https://dedust.io/pools/EQDpNY53lJFFodKp02jfo2FYMq5X2F00tTMBlg9E_MD_dnSV" class="btn" target="_blank">⚡ КУПИТЬ НА DeDust</a>
-    <a href="https://tonviewer.com/EQAWhZugOyWUhCTUwTzDQTtEUSAaAOoki6esWjL2WMEFABSs" class="btn btn-outline" target="_blank">🔍 TonViewer</a>
-    <a href="https://tonscan.org/jetton/EQAWhZugOyWUhCTUwTzDQTtEUSAaAOoki6esWjL2WMEFABSs" class="btn btn-outline" target="_blank">📜 Tonscan</a>
-
-    <div class="pixel-border" style="margin-top: 25px;">
-      <p style="font-size: 8px; line-height: 1.6;">
-        DDR2 — это не просто мем. Это состояние души.<br>
-        Низкая задержка. Высокая частота. Никаких тормозов.<br><br>
-        <span class="blink">▶ LOW LATENCY. HIGH FREQUENCY. NO PAGE FAULTS.</span>
+    <div class="section">
+      <div class="section-label">ATTENTION</div>
+      <p style="font-size:9px; line-height:1.6; color:#00cc66;">
+        Ты держишь в руках <strong style="color:#00ff88;">самый быстрый мемкоин на TON</strong>.<br>
+        Никаких тормозов. Никаких лагов. Только чистая скорость.
       </p>
+    </div>
+
+    <div class="section">
+      <div class="section-label">INTEREST</div>
+      <ul class="bullet-list">
+        <li><strong>1,000,000 DDR2</strong> — эмиссия навсегда</li>
+        <li>Смарт-контракт <strong>верифицирован</strong> — код открыт</li>
+        <li>Ликвидность на <strong>DeDust</strong> — честный DEX</li>
+        <li>Первый и единственный RAM-мемкоин на TON</li>
+        <li>Ты заходишь на <strong>ground floor</strong></li>
+      </ul>
+      <div class="info-grid">
+        <div><div class="lbl">Контракт</div><div class="val">EQAWhZugOyWUhCTUwTzDQTtEUSAaAOoki6esWjL2WMEFABSs</div></div>
+        <div><div class="lbl">Сеть</div><div class="val">TON (Jetton)</div></div>
+        <div><div class="lbl">Символ</div><div class="val">DDR2</div></div>
+        <div><div class="lbl">Десятичных</div><div class="val">9</div></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-label">DESIRE</div>
+      <div class="stats">
+        <div class="stat">
+          <div class="stat-num">999K</div>
+          <div class="stat-label">В ОБРАЩЕНИИ</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">1</div>
+          <div class="stat-label">ДЕРЖАТЕЛЬ</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">0.18 TON</div>
+          <div class="stat-label">ЛИКВИДНОСТЬ</div>
+        </div>
+      </div>
+      <p style="font-size:8px; line-height:1.6; color:#00cc66; margin-top:10px;">
+        Пока ты читаешь, кто-то уже покупает.<br>
+        Вопрос не в том, <em>войдёшь ли ты</em>.<br>
+        Вопрос — <strong style="color:#00ff88;">по какой цене</strong>.
+      </p>
+    </div>
+
+    <div class="section" style="border-color: #00ff88; border-width: 4px;">
+      <div class="section-label">ACTION</div>
+      <p style="font-size:8px; color:#008844; margin-bottom:15px;">
+        Купить сейчас — потом будет дороже.
+      </p>
+      <a href="https://dedust.io/pools/EQDpNY53lJFFodKp02jfo2FYMq5X2F00tTMBlg9E_MD_dnSV" class="btn btn-lg" target="_blank">⚡ КУПИТЬ DDR2 НА DeDust</a>
+      <div style="margin-top:15px;">
+        <a href="https://tonviewer.com/EQAWhZugOyWUhCTUwTzDQTtEUSAaAOoki6esWjL2WMEFABSs" class="btn btn-outline" target="_blank">🔍 TonViewer</a>
+        <a href="https://tonscan.org/jetton/EQAWhZugOyWUhCTUwTzDQTtEUSAaAOoki6esWjL2WMEFABSs" class="btn btn-outline" target="_blank">📜 Tonscan</a>
+      </div>
+    </div>
+
+    <div class="quote">
+      «DDR2 — это не просто мем. Это состояние памяти.»<br><br>
+      <span class="blink">▶ LOW LATENCY. HIGH FREQUENCY. NO PAGE FAULTS.</span>
     </div>
 
     <div class="footer">
       DDR2 Coin 2026 — Built on TON<br>
       Not financial advice. Just vibes.<br>
-      <span style="font-size: 6px;">DDR2 > DDR3 > DDR4 > DDR5</span>
+      <span style="font-size:6px;">DDR2 > DDR3 > DDR4 > DDR5</span>
     </div>
   </div>
 </body>
