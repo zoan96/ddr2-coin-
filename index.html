@@ -36,15 +36,7 @@
       min-height: 100vh;
       overflow-x: hidden;
     }
-    /* noise overlay */
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
-      pointer-events: none;
-      z-index: 9999;
-    }
+
     .wrap { max-width: 800px; margin: 0 auto; padding: 0 20px; }
 
     /* === HEADER === */
@@ -69,7 +61,7 @@
       text-decoration: none;
       text-shadow: 0 0 10px var(--green);
     }
-    .logo span { color: var(--muted); font-size: 8px; display: block; margin-top: 3px; }
+      .logo span { color: var(--muted); font-size: 9px; display: block; margin-top: 3px; }
     nav a {
       color: var(--muted);
       text-decoration: none;
@@ -213,7 +205,7 @@
     }
     .col-title {
       font-family: 'Press Start 2P', monospace;
-      font-size: 8px;
+      font-size: 10px;
       color: var(--yellow);
       margin-bottom: 10px;
     }
@@ -341,46 +333,32 @@
     }
     footer .socials a:hover { color: var(--green); }
 
-    /* === GLITCH === */
-    .glitch { position: relative; }
-    .glitch::before,
-    .glitch::after {
-      content: attr(data-text);
-      position: absolute;
-      left: 0;
-      right: 0;
-      overflow: hidden;
+
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
     }
-    .glitch::before {
-      animation: glitch1 3s infinite linear;
-      clip-path: inset(0 0 65% 0);
-      color: #ff0040;
-      opacity: 0.15;
+
+    a:focus-visible, .btn:focus-visible, .nav-toggle-label:focus-visible {
+      outline: 2px solid var(--yellow);
+      outline-offset: 4px;
     }
-    .glitch::after {
-      animation: glitch2 3s infinite linear;
-      clip-path: inset(65% 0 0 0);
-      color: #00f0ff;
-      opacity: 0.15;
-    }
-    @keyframes glitch1 {
-      0%, 88%, 100% { transform: translate(0); }
-      90% { transform: translate(-3px, 1px); }
-      92% { transform: translate(3px, -1px); }
-      94% { transform: translate(-1px, 2px); }
-      96% { transform: translate(2px, 0); }
-    }
-    @keyframes glitch2 {
-      0%, 88%, 100% { transform: translate(0); }
-      90% { transform: translate(2px, -1px); }
-      92% { transform: translate(-2px, 1px); }
-      94% { transform: translate(1px, -2px); }
-      96% { transform: translate(-3px, 0); }
-    }
+
+    #nav-toggle { display: none; }
+    .nav-toggle-label { display: none; }
 
     @media (max-width: 600px) {
       .cols { grid-template-columns: 1fr; }
-      nav { display: none; }
+      nav { display: block; position: relative; }
+      .nav-toggle-label { display: block; cursor: pointer; color: var(--green); font-size: 22px; line-height: 1; }
+      .nav-links { display: none; flex-direction: column; position: absolute; top: 100%; right: 0; background: rgba(10,10,10,0.98); border: 1px solid #222; padding: 16px; min-width: 180px; }
+      #nav-toggle:checked ~ .nav-links { display: flex; }
+      .nav-links a { margin: 0 0 12px 0; font-size: 11px; }
+      .nav-links a:last-child { margin-bottom: 0; }
       h1 { font-size: 22px; }
     }
   </style>
@@ -392,9 +370,13 @@
     <div class="wrap">
       <a href="#" class="logo">$DDR2 <span>JETTON on TON</span></a>
       <nav>
-        <a href="#about">О токене</a>
-        <a href="#buy">Как купить</a>
-        <a href="#contract">Контракт</a>
+        <input type="checkbox" id="nav-toggle">
+        <label for="nav-toggle" class="nav-toggle-label" aria-label="Меню">☰</label>
+        <div class="nav-links">
+          <a href="#about">О токене</a>
+          <a href="#buy">Как купить</a>
+          <a href="#contract">Контракт</a>
+        </div>
       </nav>
     </div>
   </header>
@@ -403,7 +385,7 @@
   <section class="hero">
     <div class="wrap">
       <div class="ram-art"></div>
-      <h1 class="glitch" data-text="DDR2 COIN">DDR2 COIN</h1>
+      <h1>DDR2 COIN</h1>
       <p class="hero-sub">
         Low Latency. High Frequency. No Page Faults.<br>
         Хватит тормознутых мемкоинов. Этот — на чистой скорости. Без лагов. Без подхалимства.

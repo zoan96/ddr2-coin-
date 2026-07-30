@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://zoan96.github.io/ddr2-coin-/sitemap.xml
